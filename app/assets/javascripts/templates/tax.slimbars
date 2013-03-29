@@ -1,0 +1,51 @@
+form action="" class="form-horizontal social-security-form"
+  .row.location.well
+    .span4
+      .control-group
+        .control-label 省市
+        .controls
+          | {{view Em.TextField valueBinding="province" class="province"}}
+    .span4
+      .control-group
+        .control-label 区县
+        .controls {{view Em.TextField valueBinding="city" class="city"}}
+  table
+    thead
+      tr
+        th 名称
+        th 公司
+        th 个人
+        th 合计
+    tbody
+      tr
+        td 养老
+        td {{view Em.TextField valueBinding="company_yanglao"}}
+        td {{view Em.TextField valueBinding="person_yanglao"}}
+        td {{sum_yanglao}}
+      tr
+        td 医疗
+        td {{view Em.TextField valueBinding="company_yiliao"}}
+        td {{view Em.TextField valueBinding="person_yiliao"}}
+        td {{sum_yiliao}}
+      tr
+        td 失业
+        td {{view Em.TextField valueBinding="company_shiye"}}
+        td {{view Em.TextField valueBinding="person_shiye"}}
+        td {{sum_shiye}}
+      tr
+        td 生育
+        td {{view Em.TextField valueBinding="company_shengyu"}}
+        td {{view Em.TextField valueBinding="person_shengyu"}}
+        td {{sum_shengyu}}
+      tr
+        td 工伤
+        td {{view Em.TextField valueBinding="company_gongshang"}}
+        td {{view Em.TextField valueBinding="person_gongshang"}}
+        td {{sum_gongshang}}
+      tr
+        td 住房
+        td {{view Em.TextField valueBinding="company_zhufang"}}
+        td {{view Em.TextField valueBinding="person_zhufang"}}
+        td {{sum_zhufang}}
+
+
