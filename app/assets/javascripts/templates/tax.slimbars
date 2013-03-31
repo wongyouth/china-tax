@@ -3,49 +3,74 @@ form action="" class="form-horizontal social-security-form"
     .span4
       .control-group
         .control-label 省市
-        .controls
-          | {{view Em.TextField valueBinding="province" class="province"}}
+        .controls {{view Em.TextField valueBinding="province" class="province"}}
     .span4
       .control-group
         .control-label 区县
         .controls {{view Em.TextField valueBinding="city" class="city"}}
-  table
+  .row.salary
+      .control-group.pull-right
+        .control-label 薪金
+        .controls {{view Em.TextField valueBinding="salary" class="salary"}}
+  table.table.table-bordered
     thead
       tr
-        th 名称
-        th 公司
-        th 个人
-        th 合计
+        th rowspan="2"
+        th colspan="2" 公司缴纳
+        th colspan="2" 个人缴纳
+        th colspan="2" 合计
+        th colspan="2" 统筹账户
+        th colspan="2" 个人账户
+      tr
+        - 5.times do
+          th 比例
+          th 金额
     tbody
-      tr
-        td 养老
-        td {{view Em.TextField valueBinding="company_yanglao"}}
-        td {{view Em.TextField valueBinding="person_yanglao"}}
-        td {{sum_yanglao}}
-      tr
-        td 医疗
-        td {{view Em.TextField valueBinding="company_yiliao"}}
-        td {{view Em.TextField valueBinding="person_yiliao"}}
-        td {{sum_yiliao}}
-      tr
-        td 失业
-        td {{view Em.TextField valueBinding="company_shiye"}}
-        td {{view Em.TextField valueBinding="person_shiye"}}
-        td {{sum_shiye}}
-      tr
-        td 生育
-        td {{view Em.TextField valueBinding="company_shengyu"}}
-        td {{view Em.TextField valueBinding="person_shengyu"}}
-        td {{sum_shengyu}}
-      tr
-        td 工伤
-        td {{view Em.TextField valueBinding="company_gongshang"}}
-        td {{view Em.TextField valueBinding="person_gongshang"}}
-        td {{sum_gongshang}}
-      tr
-        td 住房
-        td {{view Em.TextField valueBinding="company_zhufang"}}
-        td {{view Em.TextField valueBinding="person_zhufang"}}
-        td {{sum_zhufang}}
+      - ins = {yanglao: '养老', yiliao: '医疗', shiye: '失业', shengyu: '生育', gongshang: '工伤', zhufang: '住房'}
+      - ins.each do |k, v|
+        tr
+          td= v
+          td
+            | {{view Em.TextField valueBinding="company_#{k}"}}
+          td
+            span {{amount_for_company_#{k}}}
+          td
+            | {{view Em.TextField valueBinding="person_#{k}"}}
+          td
+            span {{amount_for_person_#{k}}}
+          td
+            | {{sum_for_#{k}}}
+          td
+            span {{amount_for_#{k}}}
+          td
+            | {{view Em.TextField valueBinding="social_#{k}"}}
+          td
+            span {{amount_for_social_#{k}}}
+          td
+            | {{left_#{k}}}
+          td
+            span {{amount_for_left_#{k}}}
 
+      tr.sum
+        td 合计
+        td
+          | {{sum_for_company}}
+        td
+          span {{amount_for_company}}
+        td
+          | {{sum_for_person}}
+        td
+          span {{amount_for_person}}
+        td
+          | {{sum_for_total}}
+        td
+          span {{amount_for_total}}
+        td
+          | {{sum_for_social}}
+        td
+          span {{amount_for_social}}
+        td
+          | {{sum_for_left}}
+        td
+          span {{amount_for_left}}
 
