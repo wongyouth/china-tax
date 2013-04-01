@@ -1,5 +1,6 @@
 ChinaTax::Application.routes.draw do
-  get "taxes/index"
+  resources :taxes
+
   root to: 'taxes#index'
 
   # The priority is based upon order of creation:

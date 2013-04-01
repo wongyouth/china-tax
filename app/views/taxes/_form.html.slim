@@ -1,0 +1,63 @@
+= form_for @tax do |f|
+  - if @tax.errors.any?
+    #error_explanation
+      h2 = "#{pluralize(@tax.errors.count, "error")} prohibited this tax from being saved:"
+      ul
+        - @tax.errors.full_messages.each do |message|
+          li = message
+
+  .field
+    = f.label :company_yanglao
+    = f.text_field :company_yanglao
+  .field
+    = f.label :company_yiliao
+    = f.text_field :company_yiliao
+  .field
+    = f.label :company_shiye
+    = f.text_field :company_shiye
+  .field
+    = f.label :company_shengyu
+    = f.text_field :company_shengyu
+  .field
+    = f.label :company_gongshang
+    = f.text_field :company_gongshang
+  .field
+    = f.label :company_zhufang
+    = f.text_field :company_zhufang
+  .field
+    = f.label :person_yanglao
+    = f.text_field :person_yanglao
+  .field
+    = f.label :person_yiliao
+    = f.text_field :person_yiliao
+  .field
+    = f.label :person_shiye
+    = f.text_field :person_shiye
+  .field
+    = f.label :person_shengyu
+    = f.text_field :person_shengyu
+  .field
+    = f.label :person_gongshang
+    = f.text_field :person_gongshang
+  .field
+    = f.label :person_zhufang
+    = f.text_field :person_zhufang
+  .field
+    = f.label :social_yanglao
+    = f.text_field :social_yanglao
+  .field
+    = f.label :social_yiliao
+    = f.text_field :social_yiliao
+  .field
+    = f.label :social_shiye
+    = f.text_field :social_shiye
+  .field
+    = f.label :social_shengyu
+    = f.text_field :social_shengyu
+  .field
+    = f.label :social_gongshang
+    = f.text_field :social_gongshang
+  .field
+    = f.label :social_zhufang
+    = f.text_field :social_zhufang
+  .actions = f.submit 'Save'

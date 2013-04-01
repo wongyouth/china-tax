@@ -1,6 +1,6 @@
 ChinaTax.Tax = DS.Model.extend
-  province: DS.attr('string')
-  city: DS.attr('string')
+  #province: DS.attr('string')
+  #city: DS.attr('string')
 
   company_yanglao   : DS.attr('number')
   company_yiliao    : DS.attr('number')
@@ -15,6 +15,13 @@ ChinaTax.Tax = DS.Model.extend
   person_shengyu   : DS.attr('number')
   person_gongshang : DS.attr('number')
   person_zhufang   : DS.attr('number')
+
+  social_yanglao   : DS.attr('number')
+  social_yiliao    : DS.attr('number')
+  social_shiye     : DS.attr('number')
+  social_shengyu   : DS.attr('number')
+  social_gongshang : DS.attr('number')
+  social_zhufang   : DS.attr('number')
 
   toF: (x)->
     val = parseFloat x
@@ -39,7 +46,6 @@ ChinaTax.Tax.reopen ["yanglao", "yiliao", "shiye", "shengyu", "gongshang", "zhuf
         @sum("#{subject}_#{name}") * @sum('salary') / 100
       ).property('salary', "#{subject}_#{name}")
 
-      prev["social_#{name}"] = DS.attr('number')
       prev["amount_for_social_#{name}"] = (->
         @sum("social_#{name}") * @sum("salary") / 100
       ).property("salary", "social_#{name}")

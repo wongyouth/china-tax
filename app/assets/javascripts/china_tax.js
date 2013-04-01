@@ -7,3 +7,7 @@
 //= require ./router
 //= require_tree ./routes
 //= require_self
+
+DS.RESTAdapter.configure('plurals', {
+  tax: 'taxes'
+})

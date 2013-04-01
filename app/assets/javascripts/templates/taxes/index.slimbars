@@ -1,0 +1,12 @@
+table.table
+  tr
+    th #
+    th name
+    th actions
+  | {{#each controller}}
+  tr
+    td {{id}}
+    td {{company_yanglao}}
+    td {{#linkTo taxes.edit this}}Edit{{/linkTo}}
+  | {{/each}}
+

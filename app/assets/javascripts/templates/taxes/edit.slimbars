@@ -1,5 +1,5 @@
 form action="" class="form-horizontal social-security-form"
-  .row.location.well
+  .row.hidden
     .span4
       .control-group
         .control-label 省市
@@ -12,7 +12,7 @@ form action="" class="form-horizontal social-security-form"
       .control-group.pull-right
         .control-label 薪金
         .controls {{view Em.TextField valueBinding="salary" class="salary"}}
-  table.table.table-bordered
+  table.table.table-bordered.table-striped
     thead
       tr
         th rowspan="2"
@@ -50,8 +50,7 @@ form action="" class="form-horizontal social-security-form"
             | {{left_#{k}}}
           td
             span {{amount_for_left_#{k}}}
-
-      tr.sum
+      tr.info
         td 合计
         td
           | {{sum_for_company}}
@@ -73,4 +72,5 @@ form action="" class="form-horizontal social-security-form"
           | {{sum_for_left}}
         td
           span {{amount_for_left}}
-
+  .pull-right
+    <button class='btn btn-primary' {{action save}}>保存</button>

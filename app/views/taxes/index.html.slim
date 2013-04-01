@@ -1,2 +1,53 @@
-h1 Taxes#index
-p Find me in app/views/taxes/index.html.slim
+h1 Listing taxes
+
+table
+  tr
+    th Company yanglao
+    th Company yiliao
+    th Company shiye
+    th Company shengyu
+    th Company gongshang
+    th Company zhufang
+    th Person yanglao
+    th Person yiliao
+    th Person shiye
+    th Person shengyu
+    th Person gongshang
+    th Person zhufang
+    th Social yanglao
+    th Social yiliao
+    th Social shiye
+    th Social shengyu
+    th Social gongshang
+    th Social zhufang
+    th
+    th
+    th
+
+  - @taxes.each do |tax|
+    tr
+      td = tax.company_yanglao
+      td = tax.company_yiliao
+      td = tax.company_shiye
+      td = tax.company_shengyu
+      td = tax.company_gongshang
+      td = tax.company_zhufang
+      td = tax.person_yanglao
+      td = tax.person_yiliao
+      td = tax.person_shiye
+      td = tax.person_shengyu
+      td = tax.person_gongshang
+      td = tax.person_zhufang
+      td = tax.social_yanglao
+      td = tax.social_yiliao
+      td = tax.social_shiye
+      td = tax.social_shengyu
+      td = tax.social_gongshang
+      td = tax.social_zhufang
+      td = link_to 'Show', tax
+      td = link_to 'Edit', edit_tax_path(tax)
+      td = link_to 'Destroy', tax, :confirm => 'Are you sure?', :method => :delete
+
+br
+
+= link_to 'New Tax', new_tax_path
