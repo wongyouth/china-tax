@@ -2,6 +2,8 @@ ChinaTax.Tax = DS.Model.extend
   #province: DS.attr('string')
   #city: DS.attr('string')
 
+  name   : DS.attr('string')
+
   company_yanglao   : DS.attr('number')
   company_yiliao    : DS.attr('number')
   company_shiye     : DS.attr('number')
@@ -81,3 +83,11 @@ ChinaTax.Tax.reopen ["company", "person", "social", "left"].reduce (prev, name)-
     prev
   , {}
 
+ChinaTax.Tax.reopen ['didCreate', 'didUpdate'].reduce (prev, name)->
+    prev[name] = ->
+      $.pnotify
+        title: '成功'
+        text: '已经成功保存到服务器'
+        type: 'success'
+    prev
+  , {}

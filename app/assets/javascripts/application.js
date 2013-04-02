@@ -19,6 +19,7 @@
 //= require ember-data
 //= require_self
 //= require china_tax
+//= require pnotify
 ChinaTax = Ember.Application.create({
   rootElement: '#content',
   LOG_TRANSITIONS: true

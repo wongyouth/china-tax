@@ -6,7 +6,9 @@ table.table
   | {{#each controller}}
   tr
     td {{id}}
-    td {{company_yanglao}}
+    td {{name}}
     td {{#linkTo taxes.edit this}}Edit{{/linkTo}}
   | {{/each}}
 
+.btn
+  | {{#linkTo taxes.new}}New{{/linkTo}}

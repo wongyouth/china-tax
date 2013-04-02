@@ -43,7 +43,14 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.6.1)
+    columnize (0.3.6)
     commonjs (0.2.6)
+    debugger (1.5.0)
+      columnize (>= 0.3.1)
+      debugger-linecache (~> 1.2.0)
+      debugger-ruby_core_source (~> 1.2.0)
+    debugger-linecache (1.2.0)
+    debugger-ruby_core_source (1.2.0)
     diff-lcs (1.1.3)
     ember-data-source (0.0.5)
       ember-source
@@ -83,6 +90,7 @@ GEM
       treetop (~> 1.4.8)
     mime-types (1.21)
     multi_json (1.7.1)
+    pnotify-rails (1.2.0)
     polyglot (0.3.3)
     quiet_assets (1.0.2)
       railties (>= 3.1, < 5.0)
@@ -165,10 +173,12 @@ PLATFORMS
 
 DEPENDENCIES
   coffee-rails (~> 3.2.1)
+  debugger
   ember-rails
   handlebars_assets
   jquery-rails
   less-rails
+  pnotify-rails
   quiet_assets
   rails (= 3.2.12)
   rspec-rails

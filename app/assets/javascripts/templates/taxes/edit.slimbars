@@ -1,3 +1,31 @@
+| {{#if isSaving}}
+span.badge
+  |   saving...
+| {{/if}}
+
+| {{#if isLoaded}}
+span.badge
+  |   loaded...
+| {{/if}}
+
+| {{#if isDirty}}
+span.badge
+  |   dirty...
+| {{/if}}
+
+| {{#if isNew}}
+span.badge
+  |   new...
+| {{else}}
+span.badge
+  |   old
+| {{/if}}
+
+| {{#if isValid}}
+span.badge
+  |   valid...
+| {{/if}}
+
 form action="" class="form-horizontal social-security-form"
   .row.hidden
     .span4
@@ -8,8 +36,13 @@ form action="" class="form-horizontal social-security-form"
       .control-group
         .control-label 区县
         .controls {{view Em.TextField valueBinding="city" class="city"}}
-  .row.salary
-      .control-group.pull-right
+  .row
+    .span4
+      .control-group
+        .control-label 标题
+        .controls {{view Em.TextField valueBinding="name" class="name"}}
+    .span4
+      .control-group
         .control-label 薪金
         .controls {{view Em.TextField valueBinding="salary" class="salary"}}
   table.table.table-bordered.table-striped

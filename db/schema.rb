@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130331160450) do
+ActiveRecord::Schema.define(:version => 20130402151653) do
 
   create_table "taxes", :force => true do |t|
     t.float    "company_yanglao"
@@ -34,6 +34,7 @@ ActiveRecord::Schema.define(:version => 20130331160450) do
     t.float    "social_zhufang"
     t.datetime "created_at",        :null => false
     t.datetime "updated_at",        :null => false
+    t.string   "name"
   end
 
 end
