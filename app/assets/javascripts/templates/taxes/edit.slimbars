@@ -1,31 +1,3 @@
-| {{#if isSaving}}
-span.badge
-  |   saving...
-| {{/if}}
-
-| {{#if isLoaded}}
-span.badge
-  |   loaded...
-| {{/if}}
-
-| {{#if isDirty}}
-span.badge
-  |   dirty...
-| {{/if}}
-
-| {{#if isNew}}
-span.badge
-  |   new...
-| {{else}}
-span.badge
-  |   old
-| {{/if}}
-
-| {{#if isValid}}
-span.badge
-  |   valid...
-| {{/if}}
-
 form action="" class="form-horizontal social-security-form"
   .row.hidden
     .span4
@@ -45,6 +17,13 @@ form action="" class="form-horizontal social-security-form"
       .control-group
         .control-label 薪金
         .controls {{view Em.TextField valueBinding="salary" class="salary"}}
+  .row
+    .span12
+      .control-group
+        .control-label 平均工资
+        .controls
+          | {{view Em.TextField valueBinding="avarage_salary" class="salary"}}
+          span.help-inline ({{min_insurance}} ~ {{max_insurance}})
   table.table.table-bordered.table-striped
     thead
       tr

@@ -25,6 +25,8 @@ ChinaTax.Tax = DS.Model.extend
   social_gongshang : DS.attr('number')
   social_zhufang   : DS.attr('number')
 
+  avarage_salary   : DS.attr('number')
+
   toF: (x)->
     val = parseFloat x
     if isNaN(val) then 0 else val
@@ -39,17 +41,29 @@ ChinaTax.Tax = DS.Model.extend
   ).property 'sum_for_company', 'sum_for_person'
 
   amount_for_total: (->
-    @toF @sum("sum_for_total") * @sum("salary") / 100
+    @toF @sum("sum_for_total") * @get('insurance_amount') / 100
   ).property 'salary', 'sum_for_total'
+
+  min_insurance: (->
+    parseInt @sum('avarage_salary') * 0.6
+  ).property 'avarage_salary'
+
+  max_insurance: (->
+    @sum('avarage_salary') * 3
+  ).property 'avarage_salary'
+
+  insurance_amount: (->
+    Math.max @get('min_insurance'), Math.min @get('max_insurance'), @sum 'salary'
+  ).property 'avarage_salary', 'salary'
 
 ChinaTax.Tax.reopen ["yanglao", "yiliao", "shiye", "shengyu", "gongshang", "zhufang"].reduce (prev, name)->
     ["person", "company"].forEach (subject)->
       prev["amount_for_#{subject}_#{name}"] = (->
-        @sum("#{subject}_#{name}") * @sum('salary') / 100
+        @sum("#{subject}_#{name}") * @get('insurance_amount') / 100
       ).property('salary', "#{subject}_#{name}")
 
       prev["amount_for_social_#{name}"] = (->
-        @sum("social_#{name}") * @sum("salary") / 100
+        @sum("social_#{name}") * @get('insurance_amount') / 100
       ).property("salary", "social_#{name}")
 
       prev["left_#{name}"] = (->
@@ -57,7 +71,7 @@ ChinaTax.Tax.reopen ["yanglao", "yiliao", "shiye", "shengyu", "gongshang", "zhuf
       ).property("company_#{name}", "person_#{name}", "social_#{name}")
 
       prev["amount_for_left_#{name}"] = (->
-        @sum("left_#{name}") * @sum("salary") / 100
+        @sum("left_#{name}") * @get('insurance_amount') / 100
       ).property("salary", "left_#{name}")
 
     prev["sum_for_#{name}"] = (->
@@ -65,7 +79,7 @@ ChinaTax.Tax.reopen ["yanglao", "yiliao", "shiye", "shengyu", "gongshang", "zhuf
     ).property('salary', "company_#{name}", "person_#{name}")
 
     prev["amount_for_#{name}"] = (->
-      @sum("sum_for_#{name}") * @sum('salary') / 100
+      @sum("sum_for_#{name}") * @get('insurance_amount') / 100
     ).property('salary', "sum_for_#{name}")
 
     prev
@@ -77,7 +91,7 @@ ChinaTax.Tax.reopen ["company", "person", "social", "left"].reduce (prev, name)-
     ).property 'salary', "#{name}_yanglao", "#{name}_yiliao", "#{name}_shiye", "#{name}_shengyu", "#{name}_gongshang", "#{name}_zhufang"
 
     prev["amount_for_#{name}"] = (->
-      @sum("sum_for_#{name}") * @sum("salary") / 100
+      @sum("sum_for_#{name}") * @get('insurance_amount') / 100
     ).property 'salary', "sum_for_#{name}"
 
     prev
