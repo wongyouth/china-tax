@@ -1,4 +1,4 @@
-form action="" class="form-horizontal social-security-form"
+form action="" class="form-horizontal social-security-form form-inline"
   .row.hidden
     .span4
       .control-group
@@ -13,30 +13,33 @@ form action="" class="form-horizontal social-security-form"
       .control-group
         .control-label 标题
         .controls {{view Em.TextField valueBinding="name" class="name"}}
+  .row
     .span4
       .control-group
         .control-label 薪金
-        .controls {{view Em.TextField valueBinding="salary" class="salary"}}
-  .row
-    .span12
+        .controls {{view Em.TextField valueBinding="salary" class="text-right"}}
+    .span4
       .control-group
-        .control-label 平均工资
+        .control-label
+          label.checkbox
+            | {{view Em.Checkbox checkedBinding="limit_amount"}}
+              使用平均工资计算
         .controls
-          | {{view Em.TextField valueBinding="avarage_salary" class="salary"}}
+          | {{view Em.TextField valueBinding="avarage_salary" class="span1 text-right" disabledBinding='unlimit_amount' }}
           span.help-inline ({{min_insurance}} ~ {{max_insurance}})
   table.table.table-bordered.table-striped
     thead
       tr
-        th rowspan="2"
+        th rowspan="2" 项目
         th colspan="2" 公司缴纳
         th colspan="2" 个人缴纳
-        th colspan="2" 合计
+        th.warning colspan="2" 合计
         th colspan="2" 统筹账户
         th colspan="2" 个人账户
       tr
-        - 5.times do
-          th 比例
-          th 金额
+        - 5.times do |i|
+          th class="#{'warning' if i == 2}" 比例
+          th class="#{'warning' if i == 2}" 金额
     tbody
       - ins = {yanglao: '养老', yiliao: '医疗', shiye: '失业', shengyu: '生育', gongshang: '工伤', zhufang: '住房'}
       - ins.each do |k, v|
@@ -44,45 +47,45 @@ form action="" class="form-horizontal social-security-form"
           td= v
           td
             | {{view Em.TextField valueBinding="company_#{k}"}}
-          td
+          td.amount
             span {{amount_for_company_#{k}}}
           td
             | {{view Em.TextField valueBinding="person_#{k}"}}
-          td
+          td.amount
             span {{amount_for_person_#{k}}}
-          td
+          td.warning
             | {{sum_for_#{k}}}
-          td
+          td.warning.amount
             span {{amount_for_#{k}}}
           td
             | {{view Em.TextField valueBinding="social_#{k}"}}
-          td
+          td.amount
             span {{amount_for_social_#{k}}}
           td
             | {{left_#{k}}}
-          td
+          td.amount
             span {{amount_for_left_#{k}}}
       tr.info
         td 合计
         td
           | {{sum_for_company}}
-        td
+        td.amount
           span {{amount_for_company}}
         td
           | {{sum_for_person}}
-        td
+        td.amount
           span {{amount_for_person}}
-        td
+        td.warning
           | {{sum_for_total}}
-        td
+        td.warning.amount
           span {{amount_for_total}}
         td
           | {{sum_for_social}}
-        td
+        td.amount
           span {{amount_for_social}}
         td
           | {{sum_for_left}}
-        td
+        td.amount
           span {{amount_for_left}}
   .pull-right
     <button class='btn btn-primary' {{action save}}>保存</button>
